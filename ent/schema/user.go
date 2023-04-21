@@ -4,6 +4,7 @@ import (
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
 	"hiyoko-echo/ent/util"
+	"time"
 )
 
 // User holds the schema definition for the User entity.
@@ -12,10 +13,9 @@ type User struct {
 }
 
 // Mixin of the User.
+// updateやcreateをmixinするとカラムの順序を制御出来ない
 func (User) Mixin() []ent.Mixin {
-	return []ent.Mixin{
-		TimeMixin{},
-	}
+	return []ent.Mixin{}
 }
 
 // Fields of the User.
@@ -29,6 +29,8 @@ func (User) Fields() []ent.Field {
 			Immutable().
 			Unique(),
 		field.String("name"),
+		field.Time("created_at").Immutable().Default(time.Now),
+		field.Time("updated_at").Default(time.Now).UpdateDefault(time.Now),
 	}
 }
 

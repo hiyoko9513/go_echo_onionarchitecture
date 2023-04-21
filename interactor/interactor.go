@@ -17,7 +17,7 @@ type Interactor interface {
 }
 
 type interactor struct {
-	Conn *database.EntClient
+	conn *database.EntClient
 }
 
 func NewInteractor(conn *database.EntClient) Interactor {
@@ -35,11 +35,11 @@ func (i *interactor) NewAppHandler() handler.AppHandler {
 }
 
 func (i *interactor) NewTableRepository() drep.TableRepository {
-	return prep.NewTableRepository(i.Conn)
+	return prep.NewTableRepository(i.conn)
 }
 
 func (i *interactor) NewUserRepository() drep.UserRepository {
-	return prep.NewUserRepository(i.Conn)
+	return prep.NewUserRepository(i.conn)
 }
 
 func (i *interactor) NewUserUseCase() usecase.UserUseCase {

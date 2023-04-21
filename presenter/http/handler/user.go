@@ -33,7 +33,7 @@ func (h *userHandler) ListUsers(c echo.Context) error {
 
 	users, err := h.UserUseCase.GetUsers(ctx)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusNotFound, "")
+		return echo.NewHTTPError(http.StatusBadRequest, "")
 	}
 
 	return c.JSON(http.StatusOK, users)
@@ -67,7 +67,7 @@ func (h *userHandler) CreateUser(c echo.Context) error {
 
 	user, err := h.UserUseCase.CreateUser(ctx, user)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusInternalServerError, "")
+		return echo.NewHTTPError(http.StatusBadRequest, "")
 	}
 
 	return c.JSON(http.StatusCreated, user)
@@ -82,7 +82,7 @@ func (h *userHandler) UpdateUser(c echo.Context) error {
 
 	user, err := h.UserUseCase.UpdateUser(ctx, util.ID(id))
 	if err != nil {
-		return echo.NewHTTPError(http.StatusInternalServerError, "")
+		return echo.NewHTTPError(http.StatusBadRequest, "")
 	}
 
 	return c.JSON(http.StatusOK, user)
@@ -96,7 +96,7 @@ func (h *userHandler) DeleteUser(c echo.Context) error {
 	}
 
 	if err := h.UserUseCase.DeleteUser(ctx, util.ID(id)); err != nil {
-		return echo.NewHTTPError(http.StatusInternalServerError, "")
+		return echo.NewHTTPError(http.StatusBadRequest, "")
 	}
 
 	return c.NoContent(http.StatusNoContent)

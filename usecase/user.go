@@ -2,6 +2,7 @@ package usecase
 
 import (
 	"context"
+
 	"hiyoko-echo/domain/repository"
 	"hiyoko-echo/ent"
 	"hiyoko-echo/ent/util"
@@ -44,5 +45,9 @@ func (u *userUseCase) UpdateUser(ctx context.Context, id util.ID) (*ent.User, er
 }
 
 func (u *userUseCase) DeleteUser(ctx context.Context, id util.ID) error {
-	return u.UserRepository.Delete(ctx, id)
+	user, err := u.UserRepository.Get(ctx, id)
+	if err != nil {
+		return err
+	}
+	return u.UserRepository.Delete(ctx, user)
 }

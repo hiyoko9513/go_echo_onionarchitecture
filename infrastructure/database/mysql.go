@@ -32,6 +32,7 @@ func NewMySqlConnect(env util.ServerEnv, conf Conf) (*EntClient, error) {
 	// sql.DB connection
 	db, err := sql.Open("mysql", dsn)
 	if err != nil {
+		err = fmt.Errorf("failed to connect to mysql; error: %v", err)
 		return &EntClient{}, err
 	}
 	db.SetMaxIdleConns(10)

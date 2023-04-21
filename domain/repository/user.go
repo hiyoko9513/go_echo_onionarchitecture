@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+
 	"hiyoko-echo/ent"
 	"hiyoko-echo/ent/util"
 )
@@ -11,5 +12,5 @@ type UserRepository interface {
 	Get(ctx context.Context, id util.ID) (*ent.User, error)
 	Create(ctx context.Context, user *ent.User) (*ent.User, error)
 	Update(ctx context.Context, user *ent.User) (*ent.User, error)
-	Delete(ctx context.Context, id util.ID) error
+	Delete(ctx context.Context, user *ent.User) error
 }
