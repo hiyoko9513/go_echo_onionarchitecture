@@ -1,6 +1,9 @@
 # SERVER option (local|develop|staging|production)
 SERVER=local
+
+# tools version
 GO_AIR_VERSION=latest
+GO_STATICCHECK_VERSION=latest
 
 # init
 git/init: git/commit-template
@@ -8,7 +11,8 @@ docker/db/init: docker/up sleep db/migrate
 
 # go
 go/install/tools:
-	go install github.com/cosmtrek/air@$(GO_AIR_VERSION)
+	go install github.com/cosmtrek/air@$(GO_AIR_VERSION) &&\
+	go install honnef.co/go/tools/cmd/staticcheck@$(GO_STATICCHECK_VERSION)
 
 go/lint:
 	staticcheck ./...
