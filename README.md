@@ -5,10 +5,16 @@ OS macOS
 shell zsh
 docker
 
+## ツールのインストール
+go tools
+```shell
+$ make go/install/tools
+```
+
 ## ブランチについて
 - main=local完結 hiyokoのメイン
 
-## docs
+## ドキュメント
 - [quick start](./docs/markdown/quick-start.md)
 - [folder struct](./docs/markdown/folder-struct.md)
 - [git rule](./docs/markdown/git/rule.md)
