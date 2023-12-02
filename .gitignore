@@ -2,7 +2,8 @@
 .github/.gitmessage.txt
 
 # tmp file
-cmd/public/tmp
+/cmd/public/tmp
+/tmp
 
 # production file
 *.production
