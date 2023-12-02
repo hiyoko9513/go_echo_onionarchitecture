@@ -4,6 +4,7 @@
 # tmp file
 cmd/public/tmp
 
+# production file
 *.production
 
 
