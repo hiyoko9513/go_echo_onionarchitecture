@@ -4,6 +4,8 @@
 # tmp file
 cmd/public/tmp
 
+*.production
+
 
 #####################################
 ### ↓ templates
