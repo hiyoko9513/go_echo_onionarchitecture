@@ -6,4 +6,4 @@ $ make git/init
 ```
 
 ## docs
-[commit](/docs/markdown/git/commit-rule.md)
+[commit](./commit-rule.md)
