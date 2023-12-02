@@ -31,7 +31,7 @@ func init() {
 	if err != nil {
 		log.Panicf("failed to create seed; error: %v", err)
 	}
-	rand.Seed(seed.Int64()) // go1.20から自動設定される
+	rand.NewSource(seed.Int64())
 
 	// flag
 	server := flag.String("server", "local", "server environment")

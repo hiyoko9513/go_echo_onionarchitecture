@@ -23,6 +23,9 @@ const (
 	DBQuerySeed     = "seed"
 	DBQueryTruncate = "truncate"
 	DBQueryDrop     = "drop"
+
+	ErrDefaultMsg      = "failed to query %s; error: %v"
+	QuerySuccessfulMsg = "success query %s"
 )
 
 var (
@@ -37,7 +40,7 @@ func init() {
 	if err != nil {
 		log.Panicf("failed to create seed; error: %v", err)
 	}
-	rand.Seed(seed.Int64()) // go1.20から自動設定される
+	rand.NewSource(seed.Int64())
 
 	// flag
 	server := flag.String("server", "local", "server environment")
@@ -72,37 +75,36 @@ func main() {
 	i := interactor.NewInteractor(entClient)
 	r := i.NewTableRepository()
 
-	// todo あんまりいい作りではないような？
 	switch *query {
 	case DBQueryPing:
 		err := r.Ping(ctx)
 		if err != nil {
-			log.Panicf("failed to query %s; error: %v", DBQueryPing, err)
+			log.Panicf(ErrDefaultMsg, DBQueryPing, err)
 		}
-		fmt.Printf("success query %s", DBQueryPing)
+		fmt.Printf(QuerySuccessfulMsg, DBQueryPing)
 	case DBQueryMigrate:
 		err := r.Migrate(ctx)
 		if err != nil {
-			log.Panicf("failed to query %s; error: %v", DBQueryMigrate, err)
+			log.Panicf(ErrDefaultMsg, DBQueryMigrate, err)
 		}
-		fmt.Printf("success query %s", DBQueryMigrate)
+		fmt.Printf(QuerySuccessfulMsg, DBQueryMigrate)
 	case DBQuerySeed:
 		err := r.Seed(ctx)
 		if err != nil {
-			log.Panicf("failed to query %s; error: %v", DBQuerySeed, err)
+			log.Panicf(ErrDefaultMsg, DBQuerySeed, err)
 		}
-		fmt.Printf("success query %s", DBQuerySeed)
+		fmt.Printf(QuerySuccessfulMsg, DBQuerySeed)
 	case DBQueryTruncate:
 		err := r.TruncateAll(ctx)
 		if err != nil {
-			log.Panicf("failed to query %s; error: %v", DBQueryTruncate, err)
+			log.Panicf(ErrDefaultMsg, DBQueryTruncate, err)
 		}
-		fmt.Printf("success query %s", DBQueryTruncate)
+		fmt.Printf(QuerySuccessfulMsg, DBQueryTruncate)
 	case DBQueryDrop:
 		err := r.DropAll(ctx)
 		if err != nil {
-			log.Panicf("failed to query %s; error: %v", DBQueryDrop, err)
+			log.Panicf(ErrDefaultMsg, DBQueryDrop, err)
 		}
-		fmt.Printf("success query %s", DBQueryDrop)
+		fmt.Printf(QuerySuccessfulMsg, DBQueryDrop)
 	}
 }
