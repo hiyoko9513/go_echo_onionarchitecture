@@ -14,7 +14,7 @@ docker
 - [git rule](./docs/markdown/git/rule.md)
 
 ## 問題
-- sqlのdebugmodeが利用できない（https://github.com/ent/ent/issues/85）
+- sqlのdebug modeが利用できない（https://github.com/ent/ent/issues/85）
 - entの外部テンプレートについて、client.goに組み込みたい
 
 ## depend on(go)

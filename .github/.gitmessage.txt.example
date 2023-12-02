@@ -1,3 +1,7 @@
+:emoji: Subject
+#
+# Commit body...
+#
 # ==================== Emojis ====================
 # 🎉  :tada: 初めてのコミット（Initial Commit）
 # 🔖  :bookmark: バージョンタグ（Version Tag）
@@ -12,8 +16,3 @@
 # 💩  :hankey: 非推奨追加（Deprecation）
 # 🗑️  :wastebasket: 削除（Removal）
 # 🚧  :construction: WIP(Work In Progress)
-#
-# ==================== Format ====================
-:emoji: Subject
-#
-# Commit body...
