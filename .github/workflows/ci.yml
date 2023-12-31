@@ -49,12 +49,10 @@ jobs:
         shell: bash
         if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
-
       - name: Run Test
         run: |
           go test -v ./...
           go vet -v ./...
-
       - name: Run Lint staticcheck
         uses: dominikh/staticcheck-action@v1.3.0
         with:
