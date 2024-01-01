@@ -40,7 +40,6 @@ func init() {
 }
 
 type logger struct {
-	aLog *slog.Logger
 	dLog *slog.Logger
 	iLog *slog.Logger
 	wLog *slog.Logger
