@@ -12,10 +12,10 @@ import (
 
 	"hiyoko-echo/configs"
 	"hiyoko-echo/internal/infrastructure/database"
-	"hiyoko-echo/internal/infrastructure/router"
 	"hiyoko-echo/internal/interactor"
 	logger "hiyoko-echo/internal/pkg/logger/local"
 	"hiyoko-echo/internal/presentation/http/middleware"
+	"hiyoko-echo/internal/presentation/http/router"
 	"hiyoko-echo/util"
 
 	"github.com/labstack/echo/v4"
