@@ -4,13 +4,13 @@ import (
 	crand "crypto/rand"
 	"flag"
 	"fmt"
-	"log"
 	"math"
 	"math/big"
 	"math/rand"
 
 	"hiyoko-echo/configs"
 	"hiyoko-echo/internal/infrastructure/database"
+	"hiyoko-echo/pkg/logging/file"
 	"hiyoko-echo/util"
 )
 
@@ -29,7 +29,7 @@ func init() {
 	// seed
 	seed, err := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
 	if err != nil {
-		log.Panicf("failed to create seed; error: %v", err)
+		logger.Fatal("failed to create seed", "error", err)
 	}
 	rand.NewSource(seed.Int64())
 
@@ -41,7 +41,7 @@ func init() {
 	// load env
 	serverEnv = util.ServerEnv(*server)
 	if ok := serverEnv.Regexp(); !ok {
-		panic("invalid server environment")
+		logger.Fatal("invalid server environment")
 	}
 	util.LoadEnv(serverEnv, EnvRoot)
 	databaseConf = configs.NewMySqlConf()
@@ -53,12 +53,12 @@ func init() {
 func main() {
 	entClient, err := database.NewMySqlConnect(serverEnv, databaseConf)
 	if err != nil {
-		log.Panicf("failed to create dbclient; error: %v", err)
+		logger.Fatal("failed to create dbclient", "error", err)
 	}
 	defer func(entClient *database.EntClient) {
 		err := entClient.Close()
 		if err != nil {
-			log.Panicf("failed to close dbclient; error: %v", err)
+			logger.Fatal("failed to close dbclient", "error", err)
 		}
 	}(entClient)
 

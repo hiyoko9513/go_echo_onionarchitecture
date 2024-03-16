@@ -30,7 +30,6 @@ var (
 )
 
 func init() {
-
 	logger.SetLogDir(logDir)
 	logger.Initialize()
 

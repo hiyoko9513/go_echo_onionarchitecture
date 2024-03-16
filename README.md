@@ -38,9 +38,10 @@ shell zsh
 docker
 
 ## todo
-- 全ファイルでloggerを利用するようにする
 - validate input output ユーザー入力値についてプレゼンテーション層で行う
 - エラーハンドリング
+- oapi code gen
+- https://github.com/hiyoko9513/go_echo_oapi_codegen
 - diについて
 - dtoのついか
 - 時間のutil
@@ -49,8 +50,6 @@ docker
 - vendorについて
 - バージョンアップ（全体的に）
 - todoの消化
-- oapi code gen
-- https://github.com/hiyoko9513/go_echo_oapi_codegen
 - 全てのどうかく
 - golangをdocker化
 - 全てのどうかく

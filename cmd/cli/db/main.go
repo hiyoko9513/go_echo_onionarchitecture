@@ -4,9 +4,6 @@ import (
 	"context"
 	crand "crypto/rand"
 	"flag"
-	"fmt"
-	"hiyoko-echo/util"
-	"log"
 	"math"
 	"math/big"
 	"math/rand"
@@ -14,6 +11,8 @@ import (
 	"hiyoko-echo/configs"
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/interactor"
+	"hiyoko-echo/pkg/logging/file"
+	"hiyoko-echo/util"
 )
 
 const (
@@ -24,9 +23,11 @@ const (
 	DBQueryTruncate = "truncate"
 	DBQueryDrop     = "drop"
 
-	ErrDefaultMsg      = "failed to query %s; error: %v"
-	QuerySuccessfulMsg = "success query %s"
+	ErrDefaultMsg      = "failed to query"
+	QuerySuccessfulMsg = "success query"
 )
+
+const logDir = "./log/cli/db"
 
 var (
 	serverEnv    util.ServerEnv
@@ -35,17 +36,21 @@ var (
 )
 
 func init() {
-	// seed
-	seed, err := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
-	if err != nil {
-		log.Panicf("failed to create seed; error: %v", err)
-	}
-	rand.NewSource(seed.Int64())
-
 	// flag
 	server := flag.String("server", "local", "server environment")
 	query = flag.String("query", "ping", "exec query")
 	flag.Parse()
+
+	logger.SetLogDir(logDir)
+	logger.Initialize()
+	logger.With("query", query)
+
+	// seed
+	seed, err := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
+	if err != nil {
+		logger.Fatal("failed to create seed", "error", err)
+	}
+	rand.NewSource(seed.Int64())
 
 	// load env
 	serverEnv = util.ServerEnv(*server)
@@ -62,12 +67,12 @@ func init() {
 func main() {
 	entClient, err := database.NewMySqlConnect(serverEnv, databaseConf)
 	if err != nil {
-		log.Panicf("failed to create dbclient; error: %v", err)
+		logger.Fatal("failed to create dbclient", "error", err)
 	}
 	defer func(entClient *database.EntClient) {
 		err := entClient.Close()
 		if err != nil {
-			log.Panicf("failed to close dbclient; error: %v", err)
+			logger.Fatal("failed to close dbclient", "error", err)
 		}
 	}(entClient)
 
@@ -79,32 +84,28 @@ func main() {
 	case DBQueryPing:
 		err := r.Ping(ctx)
 		if err != nil {
-			log.Panicf(ErrDefaultMsg, DBQueryPing, err)
+			logger.Fatal(ErrDefaultMsg, "error", err)
 		}
-		fmt.Printf(QuerySuccessfulMsg, DBQueryPing)
 	case DBQueryMigrate:
 		err := r.Migrate(ctx)
 		if err != nil {
-			log.Panicf(ErrDefaultMsg, DBQueryMigrate, err)
+			logger.Fatal(ErrDefaultMsg, "error", err)
 		}
-		fmt.Printf(QuerySuccessfulMsg, DBQueryMigrate)
 	case DBQuerySeed:
 		err := r.Seed(ctx)
 		if err != nil {
-			log.Panicf(ErrDefaultMsg, DBQuerySeed, err)
+			logger.Fatal(ErrDefaultMsg, "error", err)
 		}
-		fmt.Printf(QuerySuccessfulMsg, DBQuerySeed)
 	case DBQueryTruncate:
 		err := r.TruncateAll(ctx)
 		if err != nil {
-			log.Panicf(ErrDefaultMsg, DBQueryTruncate, err)
+			logger.Fatal(ErrDefaultMsg, "error", err)
 		}
-		fmt.Printf(QuerySuccessfulMsg, DBQueryTruncate)
 	case DBQueryDrop:
 		err := r.DropAll(ctx)
 		if err != nil {
-			log.Panicf(ErrDefaultMsg, DBQueryDrop, err)
+			logger.Fatal(ErrDefaultMsg, "error", err)
 		}
-		fmt.Printf(QuerySuccessfulMsg, DBQueryDrop)
+		logger.Info(QuerySuccessfulMsg)
 	}
 }

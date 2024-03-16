@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"context"
-	logger "hiyoko-echo/pkg/logging/file"
 	"net/http"
 
 	"hiyoko-echo/internal/application/usecase"
@@ -30,9 +28,6 @@ func NewUserHandler(u usecase.UserUseCase) UserHandler {
 
 func (h *userHandler) ListUsers(c echo.Context) error {
 	ctx := c.Request().Context()
-	if ctx == nil {
-		ctx = context.Background()
-	}
 
 	users, err := h.UserUseCase.GetUsers(ctx)
 	if err != nil {
@@ -43,12 +38,8 @@ func (h *userHandler) ListUsers(c echo.Context) error {
 }
 
 func (h *userHandler) GetUser(c echo.Context) error {
-	id := c.Param("id")
 	ctx := c.Request().Context()
-	if ctx == nil {
-		ctx = context.Background()
-	}
-	logger.Info("get user", "id", id)
+	id := c.Param("id")
 
 	user, err := h.UserUseCase.GetUser(ctx, util.ID(id))
 	if err != nil {
@@ -59,14 +50,10 @@ func (h *userHandler) GetUser(c echo.Context) error {
 }
 
 func (h *userHandler) CreateUser(c echo.Context) error {
+	ctx := c.Request().Context()
 	user := &ent.User{}
 	if err := c.Bind(user); err != nil {
 		return err
-	}
-
-	ctx := c.Request().Context()
-	if ctx == nil {
-		ctx = context.Background()
 	}
 
 	user, err := h.UserUseCase.CreateUser(ctx, user)
@@ -78,11 +65,8 @@ func (h *userHandler) CreateUser(c echo.Context) error {
 }
 
 func (h *userHandler) UpdateUser(c echo.Context) error {
-	id := c.Param("id")
 	ctx := c.Request().Context()
-	if ctx == nil {
-		ctx = context.Background()
-	}
+	id := c.Param("id")
 
 	user, err := h.UserUseCase.UpdateUser(ctx, util.ID(id))
 	if err != nil {
@@ -93,11 +77,8 @@ func (h *userHandler) UpdateUser(c echo.Context) error {
 }
 
 func (h *userHandler) DeleteUser(c echo.Context) error {
-	id := c.Param("id")
 	ctx := c.Request().Context()
-	if ctx == nil {
-		ctx = context.Background()
-	}
+	id := c.Param("id")
 
 	if err := h.UserUseCase.DeleteUser(ctx, util.ID(id)); err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest, "")
