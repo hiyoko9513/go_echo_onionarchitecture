@@ -37,18 +37,19 @@ shell zsh
 docker
 
 ## todo
-- echo文言の削除
-- util envの修正
 - loggerの作成+リクエストID追跡が出来るか等
 - validate input output ユーザー入力値についてプレゼンテーション層で行う
 - エラーハンドリング
 - diについて
 - dtoのついか
 - 時間のutil
+- ctxにリクエストIDを導入
 - domain serviceにentityを追加
 - vendorについて
 - バージョンアップ（全体的に）
 - todoの消化
+- oapi code gen
+- https://github.com/hiyoko9513/go_echo_oapi_codegen
 - 全てのどうかく
 - golangをdocker化
 - 全てのどうかく

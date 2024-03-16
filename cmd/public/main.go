@@ -65,6 +65,7 @@ func init() {
 
 func main() {
 	e := echo.New()
+	e.HideBanner = true
 	entClient, err := database.NewMySqlConnect(serverEnv, databaseConf)
 	if err != nil {
 		loging.Fatalf(ctx, "failed to create dbclient; error: %v", err)

@@ -15,6 +15,10 @@ func JstNow() time.Time {
 	return time.Now().In(jst)
 }
 
+func LoadTimezone() {
+	time.Local = Timezone()
+}
+
 func Timezone() (tz *time.Location) {
 	tz, err := time.LoadLocation(Env("TZ").GetString("Asia/Tokyo"))
 	if err != nil {

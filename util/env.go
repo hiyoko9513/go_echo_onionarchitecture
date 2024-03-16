@@ -2,16 +2,12 @@ package util
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"log"
 	"os"
 	"regexp"
 	"strconv"
-	"time"
-
-	"github.com/joho/godotenv"
 )
-
-type Env string
 
 type ServerEnv string
 
@@ -36,9 +32,7 @@ func LoadEnv(server ServerEnv, rootPath string) {
 	}
 }
 
-func LoadTimezone() {
-	time.Local = Timezone()
-}
+type Env string
 
 func (e Env) GetString(defaultVal string) string {
 	value := os.Getenv(string(e))
