@@ -3,8 +3,8 @@ package repository
 import (
 	"context"
 
-	"hiyoko-echo/domain/repository"
-	"hiyoko-echo/infrastructure/database"
+	"hiyoko-echo/internal/domain/repository"
+	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
 )

@@ -10,7 +10,8 @@ import (
 	"math/rand"
 
 	"hiyoko-echo/configs"
-	"hiyoko-echo/infrastructure/database"
+	"hiyoko-echo/internal/infrastructure/database"
+	"hiyoko-echo/util"
 )
 
 const (

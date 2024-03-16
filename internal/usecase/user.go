@@ -3,7 +3,7 @@ package usecase
 import (
 	"context"
 
-	"hiyoko-echo/domain/repository"
+	"hiyoko-echo/internal/domain/repository"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
 )

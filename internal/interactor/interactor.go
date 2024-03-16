@@ -1,11 +1,11 @@
 package interactor
 
 import (
-	drep "hiyoko-echo/domain/repository"
-	"hiyoko-echo/infrastructure/database"
-	prep "hiyoko-echo/infrastructure/persistence/repository"
-	"hiyoko-echo/presenter/http/handler"
-	"hiyoko-echo/usecase"
+	drep "hiyoko-echo/internal/domain/repository"
+	"hiyoko-echo/internal/infrastructure/database"
+	prep "hiyoko-echo/internal/infrastructure/persistence/repository"
+	"hiyoko-echo/internal/presenter/http/handler"
+	"hiyoko-echo/internal/usecase"
 )
 
 type Interactor interface {

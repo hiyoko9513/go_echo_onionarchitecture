@@ -1,7 +1,7 @@
 package configs
 
 import (
-	"hiyoko-echo/infrastructure/database"
+	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/util"
 )
 

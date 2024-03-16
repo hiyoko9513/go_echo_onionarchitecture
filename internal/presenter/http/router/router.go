@@ -1,8 +1,9 @@
 package router
 
 import (
+	"hiyoko-echo/internal/presenter/http/handler"
+
 	"github.com/labstack/echo/v4"
-	"hiyoko-echo/presenter/http/handler"
 )
 
 func NewRouter(e *echo.Echo, h handler.AppHandler) {

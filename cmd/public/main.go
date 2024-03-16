@@ -11,11 +11,11 @@ import (
 	"math/rand"
 
 	"hiyoko-echo/configs"
-	"hiyoko-echo/infrastructure/database"
-	logger "hiyoko-echo/infrastructure/logger/local"
-	"hiyoko-echo/interactor"
-	"hiyoko-echo/presenter/http/middleware"
-	"hiyoko-echo/presenter/http/router"
+	"hiyoko-echo/internal/infrastructure/database"
+	logger "hiyoko-echo/internal/infrastructure/logger/local"
+	"hiyoko-echo/internal/interactor"
+	"hiyoko-echo/internal/presenter/http/middleware"
+	"hiyoko-echo/internal/presenter/http/router"
 	"hiyoko-echo/util"
 
 	"github.com/labstack/echo/v4"

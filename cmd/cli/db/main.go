@@ -5,14 +5,15 @@ import (
 	crand "crypto/rand"
 	"flag"
 	"fmt"
+	"hiyoko-echo/util"
 	"log"
 	"math"
 	"math/big"
 	"math/rand"
 
 	"hiyoko-echo/configs"
-	"hiyoko-echo/infrastructure/database"
-	"hiyoko-echo/interactor"
+	"hiyoko-echo/internal/infrastructure/database"
+	"hiyoko-echo/internal/interactor"
 )
 
 const (
