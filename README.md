@@ -37,7 +37,7 @@ shell zsh
 docker
 
 ## todo
-- loggerの作成+リクエストID追跡が出来るか等
+- loggerの作成(グローバルなpackageに落とし込む)
 - validate input output ユーザー入力値についてプレゼンテーション層で行う
 - エラーハンドリング
 - diについて
@@ -58,6 +58,7 @@ docker
 - jwtに導入
 - メール送信(パスワード忘れた機能の作成)
 - 多言語化
+- loggerにおいて、request idの紐づけについて、request idが存在しない場合はreqIDのコメントを排除
 
 ## ツールのインストール
 go tools

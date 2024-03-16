@@ -1,14 +1,16 @@
 package middleware
 
 import (
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
-	"gopkg.in/natefinch/lumberjack.v2"
-	"hiyoko-echo/configs"
-	"hiyoko-echo/util"
 	"io"
 	"strings"
 	"time"
+
+	"hiyoko-echo/configs"
+	"hiyoko-echo/util"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 func NewMiddleware(e *echo.Echo) {
@@ -29,6 +31,7 @@ func NewMiddleware(e *echo.Echo) {
 	}))
 
 	e.Use(middleware.RequestID())
+
 	logPath, _ := util.GetLogFilePath(configs.LogPath)
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format: configs.AccessLogFormat,
@@ -41,19 +44,11 @@ func NewMiddleware(e *echo.Echo) {
 		}),
 	}))
 
-	// todo 独自ロガーを組み込む
-	// todo 別ファイルへ移動する
-	//log := logrus.New()
-	//e.Use(middleware.RequestLoggerWithConfig(middleware.RequestLoggerConfig{
-	//	LogURI:    true,
-	//	LogStatus: true,
-	//	LogValuesFunc: func(c echo.Context, values middleware.RequestLoggerValues) error {
-	//		log.WithFields(logrus.Fields{
-	//			"URI":   values.URI,
-	//			"status": values.Status,
-	//		}).Info("request")
-	//
-	//		return nil
-	//	},
-	//}))
+	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
+		return func(c echo.Context) error {
+			reqID := c.Response().Header().Get(echo.HeaderXRequestID)
+			c.Set("RequestID", reqID)
+			return next(c)
+		}
+	})
 }
