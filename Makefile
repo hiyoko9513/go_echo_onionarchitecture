@@ -18,7 +18,7 @@ go/lint:
 
 # db
 ent/gen:
-	go run -mod=mod entgo.io/ent/cmd/ent generate --template glob="./pkg/mypubliclib/ent/template/*.tmpl" ./pkg/mypubliclib/ent/schema
+	go run -mod=mod entgo.io/ent/cmd/ent generate --template glob="./internal/pkg/mypubliclib/ent/template/*.tmpl" ./internal/pkg/mypubliclib/ent/schema
 
 db/migrate:
 	go run ./cmd/cli/db/main.go -server $(SERVER) -query migrate
@@ -49,6 +49,7 @@ quick-start:
 	go mod tidy &&\
 	make go/install/tools &&\
 	source ~/.zshrc &&\
+	make ent/gen &&\
 	make docker/up &&\
 	make sleep &&\
 	make db/migrate &&\
