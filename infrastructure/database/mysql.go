@@ -8,7 +8,7 @@ import (
 	entsql "entgo.io/ent/dialect/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"hiyoko-echo/cmd/util"
-	"hiyoko-echo/pkg/mypubliclib/ent"
+	"hiyoko-echo/internal/pkg/mypubliclib/ent"
 )
 
 type Conf struct {

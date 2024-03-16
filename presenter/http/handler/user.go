@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 	"github.com/labstack/echo/v4"
-	"hiyoko-echo/pkg/mypubliclib/ent"
-	"hiyoko-echo/pkg/mypubliclib/ent/util"
+	"hiyoko-echo/internal/pkg/mypubliclib/ent"
+	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
 	"hiyoko-echo/usecase"
 	"net/http"
 )

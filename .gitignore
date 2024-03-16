@@ -9,10 +9,10 @@
 *.production
 
 # ent
-pkg/mypubliclib/ent/*
-!pkg/mypubliclib/ent/schema/*
-!pkg/mypubliclib/ent/template/*
-!pkg/mypubliclib/ent/util/*
+internal/pkg/mypubliclib/ent/*
+!internal/pkg/mypubliclib/ent/schema/*
+!internal/pkg/mypubliclib/ent/template/*
+!internal/pkg/mypubliclib/ent/util/*
 
 
 #####################################
