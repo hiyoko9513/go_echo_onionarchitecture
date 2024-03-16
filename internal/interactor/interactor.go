@@ -2,15 +2,15 @@ package interactor
 
 import (
 	"hiyoko-echo/internal/application/usecase"
-	"hiyoko-echo/internal/domain/service"
+	"hiyoko-echo/internal/domain/services"
 	"hiyoko-echo/internal/infrastructure/database"
 	prep "hiyoko-echo/internal/infrastructure/persistence/repository"
 	"hiyoko-echo/internal/presentation/http/handler"
 )
 
 type Interactor interface {
-	NewTableRepository() service.TableRepository
-	NewUserRepository() service.UserRepository
+	NewTableRepository() services.TableRepository
+	NewUserRepository() services.UserRepository
 	NewUserUseCase() usecase.UserUseCase
 	NewUserHandler() handler.UserHandler
 	NewAppHandler() handler.AppHandler
@@ -34,11 +34,11 @@ func (i *interactor) NewAppHandler() handler.AppHandler {
 	return appHandler
 }
 
-func (i *interactor) NewTableRepository() service.TableRepository {
+func (i *interactor) NewTableRepository() services.TableRepository {
 	return prep.NewTableRepository(i.conn)
 }
 
-func (i *interactor) NewUserRepository() service.UserRepository {
+func (i *interactor) NewUserRepository() services.UserRepository {
 	return prep.NewUserRepository(i.conn)
 }
 
