@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 	"fmt"
-	"hiyoko-echo/internal/domain/repository"
+	"hiyoko-echo/internal/domain/service"
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent/migrate"
 )
@@ -12,7 +12,7 @@ type tableRepository struct {
 	conn *database.EntClient
 }
 
-func NewTableRepository(conn *database.EntClient) repository.TableRepository {
+func NewTableRepository(conn *database.EntClient) service.TableRepository {
 	return &tableRepository{conn}
 }
 

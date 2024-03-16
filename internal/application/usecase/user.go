@@ -3,7 +3,7 @@ package usecase
 import (
 	"context"
 
-	"hiyoko-echo/internal/domain/repository"
+	"hiyoko-echo/internal/domain/service"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
 )
@@ -17,10 +17,10 @@ type UserUseCase interface {
 }
 
 type userUseCase struct {
-	repository.UserRepository
+	service.UserRepository
 }
 
-func NewUserUseCase(r repository.UserRepository) UserUseCase {
+func NewUserUseCase(r service.UserRepository) UserUseCase {
 	return &userUseCase{r}
 }
 

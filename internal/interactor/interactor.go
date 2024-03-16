@@ -1,16 +1,16 @@
 package interactor
 
 import (
-	drep "hiyoko-echo/internal/domain/repository"
+	"hiyoko-echo/internal/application/usecase"
+	"hiyoko-echo/internal/domain/service"
 	"hiyoko-echo/internal/infrastructure/database"
 	prep "hiyoko-echo/internal/infrastructure/persistence/repository"
 	"hiyoko-echo/internal/presentation/http/handler"
-	"hiyoko-echo/internal/usecase"
 )
 
 type Interactor interface {
-	NewTableRepository() drep.TableRepository
-	NewUserRepository() drep.UserRepository
+	NewTableRepository() service.TableRepository
+	NewUserRepository() service.UserRepository
 	NewUserUseCase() usecase.UserUseCase
 	NewUserHandler() handler.UserHandler
 	NewAppHandler() handler.AppHandler
@@ -34,11 +34,11 @@ func (i *interactor) NewAppHandler() handler.AppHandler {
 	return appHandler
 }
 
-func (i *interactor) NewTableRepository() drep.TableRepository {
+func (i *interactor) NewTableRepository() service.TableRepository {
 	return prep.NewTableRepository(i.conn)
 }
 
-func (i *interactor) NewUserRepository() drep.UserRepository {
+func (i *interactor) NewUserRepository() service.UserRepository {
 	return prep.NewUserRepository(i.conn)
 }
 

@@ -3,7 +3,7 @@ package repository
 import (
 	"context"
 
-	"hiyoko-echo/internal/domain/repository"
+	"hiyoko-echo/internal/domain/service"
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
@@ -13,7 +13,7 @@ type userRepository struct {
 	conn *database.EntClient
 }
 
-func NewUserRepository(conn *database.EntClient) repository.UserRepository {
+func NewUserRepository(conn *database.EntClient) service.UserRepository {
 	return &userRepository{conn}
 }
 
