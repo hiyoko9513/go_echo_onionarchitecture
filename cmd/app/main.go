@@ -11,8 +11,8 @@ import (
 	"hiyoko-echo/configs"
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/interactor"
-	"hiyoko-echo/internal/presentation/http/middleware"
-	"hiyoko-echo/internal/presentation/http/router"
+	"hiyoko-echo/internal/presentation/http/app/middleware"
+	"hiyoko-echo/internal/presentation/http/app/router"
 	"hiyoko-echo/pkg/logging/file"
 	"hiyoko-echo/util"
 
@@ -20,8 +20,8 @@ import (
 )
 
 const (
-	envRoot = "cmd/public"
-	logDir  = "./log/public"
+	envRoot = "cmd/app"
+	logDir  = "./log/app"
 )
 
 var (

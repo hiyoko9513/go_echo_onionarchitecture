@@ -2,8 +2,7 @@
 .github/.gitmessage.txt
 
 # tmp file
-/cmd/public/tmp
-/tmp
+tmp
 
 # production file
 *.production
@@ -13,6 +12,10 @@ internal/pkg/ent/*
 !internal/pkg/ent/schema/*
 !internal/pkg/ent/template/*
 !internal/pkg/ent/util/*
+
+# oapi
+internal/presentation/http/app/oapi/*
+api/app/openapi-spec/root.gen.yml
 
 # log
 log

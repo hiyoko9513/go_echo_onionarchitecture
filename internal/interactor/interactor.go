@@ -5,7 +5,7 @@ import (
 	"hiyoko-echo/internal/domain/services"
 	"hiyoko-echo/internal/infrastructure/database"
 	prep "hiyoko-echo/internal/infrastructure/persistence/repository"
-	"hiyoko-echo/internal/presentation/http/handler"
+	"hiyoko-echo/internal/presentation/http/app/handler"
 )
 
 type Interactor interface {

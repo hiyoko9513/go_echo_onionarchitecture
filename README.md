@@ -6,7 +6,7 @@ root
 │   ├── cli
 │   │   ├── db
 │   │   └── task
-│   └── public
+│   └── app
 │
 ├── internal:
 │   ├── interactor: ユースケースを操作するロジック
@@ -38,10 +38,10 @@ shell zsh
 docker
 
 ## todo
-- validate input output ユーザー入力値についてプレゼンテーション層で行う
-- エラーハンドリング
 - oapi code gen
 - https://github.com/hiyoko9513/go_echo_oapi_codegen
+- validate input output ユーザー入力値についてプレゼンテーション層で行う
+- エラーハンドリング
 - diについて
 - dtoのついか
 - 時間のutil
@@ -83,3 +83,4 @@ $ make go/install/tools
 - staticcheck
 - godotenv
 - air
+- oapi-codegen
