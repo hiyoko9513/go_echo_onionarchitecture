@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"hiyoko-echo/internal/application/usecases"
+	"hiyoko-echo/internal/application/usecase"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent"
 	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
 
@@ -20,10 +20,10 @@ type UserHandler interface {
 }
 
 type userHandler struct {
-	UserUseCase usecases.UserUseCase
+	UserUseCase usecase.UserUseCase
 }
 
-func NewUserHandler(u usecases.UserUseCase) UserHandler {
+func NewUserHandler(u usecase.UserUseCase) UserHandler {
 	return &userHandler{u}
 }
 

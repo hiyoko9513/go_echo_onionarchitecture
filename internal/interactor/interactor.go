@@ -1,7 +1,7 @@
 package interactor
 
 import (
-	"hiyoko-echo/internal/application/usecases"
+	"hiyoko-echo/internal/application/usecase"
 	"hiyoko-echo/internal/domain/services"
 	"hiyoko-echo/internal/infrastructure/database"
 	prep "hiyoko-echo/internal/infrastructure/persistence/repository"
@@ -11,7 +11,7 @@ import (
 type Interactor interface {
 	NewTableRepository() services.TableRepository
 	NewUserRepository() services.UserRepository
-	NewUserUseCase() usecases.UserUseCase
+	NewUserUseCase() usecase.UserUseCase
 	NewUserHandler() handler.UserHandler
 	NewAppHandler() handler.AppHandler
 }
@@ -42,8 +42,8 @@ func (i *interactor) NewUserRepository() services.UserRepository {
 	return prep.NewUserRepository(i.conn)
 }
 
-func (i *interactor) NewUserUseCase() usecases.UserUseCase {
-	return usecases.NewUserUseCase(i.NewUserRepository())
+func (i *interactor) NewUserUseCase() usecase.UserUseCase {
+	return usecase.NewUserUseCase(i.NewUserRepository())
 }
 
 func (i *interactor) NewUserHandler() handler.UserHandler {
