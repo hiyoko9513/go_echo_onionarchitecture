@@ -10,15 +10,15 @@ import (
 	"math/big"
 	"math/rand"
 
-	"github.com/labstack/echo/v4"
-	"hiyoko-echo/cmd/util"
 	"hiyoko-echo/configs"
 	"hiyoko-echo/infrastructure/database"
 	logger "hiyoko-echo/infrastructure/logger/local"
 	"hiyoko-echo/interactor"
 	"hiyoko-echo/presenter/http/middleware"
 	"hiyoko-echo/presenter/http/router"
-	"hiyoko-echo/shared"
+	"hiyoko-echo/util"
+
+	"github.com/labstack/echo/v4"
 )
 
 const (
@@ -34,7 +34,7 @@ var (
 
 func init() {
 	ctx = context.Background()
-	logFilepath, err := shared.GetLogFilePath(configs.LogPath)
+	logFilepath, err := util.GetLogFilePath(configs.LogPath)
 	if err != nil {
 		log.Fatalf("failed to get executable path; error: %v", err)
 	}
@@ -81,7 +81,7 @@ func main() {
 
 	router.NewRouter(e, h)
 	middleware.NewMiddleware(e)
-	if err := e.Start(fmt.Sprintf(":%d", shared.Env("SERVER_PORT").GetInt(8000))); err != nil {
+	if err := e.Start(fmt.Sprintf(":%d", util.Env("SERVER_PORT").GetInt(8000))); err != nil {
 		loging.Fatalf(ctx, "failed to start server; error: %v", err)
 	}
 

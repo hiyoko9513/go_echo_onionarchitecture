@@ -9,7 +9,6 @@ import (
 	"math/big"
 	"math/rand"
 
-	"hiyoko-echo/cmd/util"
 	"hiyoko-echo/configs"
 	"hiyoko-echo/infrastructure/database"
 )

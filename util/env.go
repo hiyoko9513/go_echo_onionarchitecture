@@ -2,12 +2,16 @@ package util
 
 import (
 	"fmt"
-	"github.com/joho/godotenv"
-	"hiyoko-echo/shared"
 	"log"
+	"os"
 	"regexp"
+	"strconv"
 	"time"
+
+	"github.com/joho/godotenv"
 )
+
+type Env string
 
 type ServerEnv string
 
@@ -33,5 +37,25 @@ func LoadEnv(server ServerEnv, rootPath string) {
 }
 
 func LoadTimezone() {
-	time.Local = shared.Timezone()
+	time.Local = Timezone()
+}
+
+func (e Env) GetString(defaultVal string) string {
+	value := os.Getenv(string(e))
+	if value == "" {
+		return defaultVal
+	}
+	return value
+}
+
+func (e Env) GetInt(defaultVal int) int {
+	valString := e.GetString("")
+	if valString == "" {
+		return defaultVal
+	}
+	val, err := strconv.Atoi(valString)
+	if err != nil {
+		return defaultVal
+	}
+	return val
 }

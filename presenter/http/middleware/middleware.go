@@ -5,7 +5,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"gopkg.in/natefinch/lumberjack.v2"
 	"hiyoko-echo/configs"
-	"hiyoko-echo/shared"
+	"hiyoko-echo/util"
 	"io"
 	"strings"
 	"time"
@@ -14,7 +14,7 @@ import (
 func NewMiddleware(e *echo.Echo) {
 	e.Use(middleware.Recover())
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: strings.Split(shared.Env("CLIENT_WEB_URL").GetString("*"), ","),
+		AllowOrigins: strings.Split(util.Env("CLIENT_WEB_URL").GetString("*"), ","),
 		AllowMethods: []string{echo.GET, echo.HEAD, echo.PUT, echo.PATCH, echo.POST, echo.DELETE, echo.OPTIONS},
 		AllowHeaders: []string{
 			"Access-Control-Allow-Credentials",
@@ -29,7 +29,7 @@ func NewMiddleware(e *echo.Echo) {
 	}))
 
 	e.Use(middleware.RequestID())
-	logPath, _ := shared.GetLogFilePath(configs.LogPath)
+	logPath, _ := util.GetLogFilePath(configs.LogPath)
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format: configs.AccessLogFormat,
 		Output: io.MultiWriter(&lumberjack.Logger{

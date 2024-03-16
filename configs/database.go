@@ -2,14 +2,14 @@ package configs
 
 import (
 	"hiyoko-echo/infrastructure/database"
-	"hiyoko-echo/shared"
+	"hiyoko-echo/util"
 )
 
 func NewMySqlConf() (conf database.Conf) {
-	conf.Host = shared.Env("DB_HOST").GetString("localhost")
-	conf.User = shared.Env("DB_USER").GetString("hiyoko")
-	conf.Password = shared.Env("DB_PASSWORD").GetString("hiyoko")
-	conf.Name = shared.Env("DB_NAME").GetString("hiyoko")
-	conf.Port = shared.Env("DB_PORT").GetInt(3306)
+	conf.Host = util.Env("DB_HOST").GetString("localhost")
+	conf.User = util.Env("DB_USER").GetString("hiyoko")
+	conf.Password = util.Env("DB_PASSWORD").GetString("hiyoko")
+	conf.Name = util.Env("DB_NAME").GetString("hiyoko")
+	conf.Port = util.Env("DB_PORT").GetInt(3306)
 	return
 }
