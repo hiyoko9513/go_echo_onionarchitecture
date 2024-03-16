@@ -52,6 +52,7 @@ docker
 - 全てのどうかく
 - golangをdocker化
 - 全てのどうかく
+- linter、format確認、ent実行のgitactionの追加 
 - swagger(oapiのcode genに修正)
 - jwtに導入
 - メール送信(パスワード忘れた機能の作成)
