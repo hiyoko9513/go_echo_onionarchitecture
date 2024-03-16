@@ -1,7 +1,7 @@
 package router
 
 import (
-	"hiyoko-echo/internal/presenter/http/handler"
+	"hiyoko-echo/internal/presentation/http/handler"
 
 	"github.com/labstack/echo/v4"
 )

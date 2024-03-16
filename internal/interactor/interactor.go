@@ -4,7 +4,7 @@ import (
 	drep "hiyoko-echo/internal/domain/repository"
 	"hiyoko-echo/internal/infrastructure/database"
 	prep "hiyoko-echo/internal/infrastructure/persistence/repository"
-	"hiyoko-echo/internal/presenter/http/handler"
+	"hiyoko-echo/internal/presentation/http/handler"
 	"hiyoko-echo/internal/usecase"
 )
 

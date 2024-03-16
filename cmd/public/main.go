@@ -13,9 +13,9 @@ import (
 	"hiyoko-echo/configs"
 	"hiyoko-echo/internal/infrastructure/database"
 	logger "hiyoko-echo/internal/infrastructure/logger/local"
+	"hiyoko-echo/internal/infrastructure/router"
 	"hiyoko-echo/internal/interactor"
-	"hiyoko-echo/internal/presenter/http/middleware"
-	"hiyoko-echo/internal/presenter/http/router"
+	"hiyoko-echo/internal/presentation/http/middleware"
 	"hiyoko-echo/util"
 
 	"github.com/labstack/echo/v4"
