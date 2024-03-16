@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 
-	"hiyoko-echo/internal/pkg/mypubliclib/ent"
+	"hiyoko-echo/internal/pkg/ent"
 )
 
 func rollback(tx *ent.Tx, err error) error {

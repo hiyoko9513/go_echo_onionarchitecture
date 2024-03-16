@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"hiyoko-echo/internal/pkg/mypubliclib/ent"
+	"hiyoko-echo/internal/pkg/ent"
 	"hiyoko-echo/util"
 
 	entsql "entgo.io/ent/dialect/sql"

@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"hiyoko-echo/internal/domain/services"
-	"hiyoko-echo/internal/pkg/mypubliclib/ent"
-	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
+	"hiyoko-echo/internal/pkg/ent"
+	"hiyoko-echo/internal/pkg/ent/util"
 )
 
 type UserUseCase interface {

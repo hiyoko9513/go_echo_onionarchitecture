@@ -8,9 +8,10 @@ import (
 	"path/filepath"
 	"syscall"
 
+	"hiyoko-echo/configs"
+
 	"golang.org/x/exp/slog"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"hiyoko-echo/configs"
 )
 
 // todo ログのフォーマットを指定する

@@ -12,9 +12,9 @@ import (
 
 	"hiyoko-echo/configs"
 	"hiyoko-echo/internal/infrastructure/database"
-	logger "hiyoko-echo/internal/infrastructure/logger/local"
 	"hiyoko-echo/internal/infrastructure/router"
 	"hiyoko-echo/internal/interactor"
+	logger "hiyoko-echo/internal/pkg/logger/local"
 	"hiyoko-echo/internal/presentation/http/middleware"
 	"hiyoko-echo/util"
 

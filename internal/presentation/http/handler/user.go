@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"hiyoko-echo/internal/application/usecase"
-	"hiyoko-echo/internal/pkg/mypubliclib/ent"
-	"hiyoko-echo/internal/pkg/mypubliclib/ent/util"
+	"hiyoko-echo/internal/pkg/ent"
+	"hiyoko-echo/internal/pkg/ent/util"
 
 	"github.com/labstack/echo/v4"
 )

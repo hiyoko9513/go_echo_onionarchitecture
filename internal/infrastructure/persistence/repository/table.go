@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"hiyoko-echo/internal/domain/services"
 	"hiyoko-echo/internal/infrastructure/database"
-	"hiyoko-echo/internal/pkg/mypubliclib/ent/migrate"
+	"hiyoko-echo/internal/pkg/ent/migrate"
 )
 
 type tableRepository struct {
