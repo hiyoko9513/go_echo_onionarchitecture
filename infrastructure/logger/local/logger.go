@@ -10,7 +10,7 @@ import (
 
 	"golang.org/x/exp/slog"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"hiyoko-echo/conf"
+	"hiyoko-echo/configs"
 )
 
 // todo ログのフォーマットを指定する
@@ -31,7 +31,7 @@ func init() {
 		log.Fatalf("failed to get executable path; error: %v", err)
 	}
 
-	for _, path := range conf.LogPaths {
+	for _, path := range configs.LogPaths {
 		logPath := filepath.Join(filepath.Dir(exePath), path)
 		if err = makeDirAll(logPath); err != nil {
 			log.Fatalf("failed to make directory; error: %v", err)
@@ -51,40 +51,40 @@ func NewLogger(logFilepath string) Logger {
 		Level: slog.LevelDebug,
 	}.NewJSONHandler(&lumberjack.Logger{
 		Filename:   logFilepath + DebugFilePath,
-		MaxSize:    conf.LogSize,
-		MaxBackups: conf.LogBucket,
-		MaxAge:     conf.LogAge,
-		Compress:   conf.LogCompress,
+		MaxSize:    configs.LogSize,
+		MaxBackups: configs.LogBucket,
+		MaxAge:     configs.LogAge,
+		Compress:   configs.LogCompress,
 	}))
 
 	infoLogger := slog.New(slog.HandlerOptions{
 		Level: slog.LevelInfo,
 	}.NewJSONHandler(&lumberjack.Logger{
 		Filename:   logFilepath + InfoFilePath,
-		MaxSize:    conf.LogSize,
-		MaxBackups: conf.LogBucket,
-		MaxAge:     conf.LogAge,
-		Compress:   conf.LogCompress,
+		MaxSize:    configs.LogSize,
+		MaxBackups: configs.LogBucket,
+		MaxAge:     configs.LogAge,
+		Compress:   configs.LogCompress,
 	}))
 
 	warnLogger := slog.New(slog.HandlerOptions{
 		Level: slog.LevelWarn,
 	}.NewJSONHandler(&lumberjack.Logger{
 		Filename:   logFilepath + WarnFilePath,
-		MaxSize:    conf.LogSize,
-		MaxBackups: conf.LogBucket,
-		MaxAge:     conf.LogAge,
-		Compress:   conf.LogCompress,
+		MaxSize:    configs.LogSize,
+		MaxBackups: configs.LogBucket,
+		MaxAge:     configs.LogAge,
+		Compress:   configs.LogCompress,
 	}))
 
 	errLogger := slog.New(slog.HandlerOptions{
 		Level: slog.LevelError,
 	}.NewJSONHandler(&lumberjack.Logger{
 		Filename:   logFilepath + ErrorFilePath,
-		MaxSize:    conf.LogSize,
-		MaxBackups: conf.LogBucket,
-		MaxAge:     conf.LogAge,
-		Compress:   conf.LogCompress,
+		MaxSize:    configs.LogSize,
+		MaxBackups: configs.LogBucket,
+		MaxAge:     configs.LogAge,
+		Compress:   configs.LogCompress,
 	}))
 
 	return &logger{

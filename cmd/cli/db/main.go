@@ -11,7 +11,7 @@ import (
 	"math/rand"
 
 	"hiyoko-echo/cmd/util"
-	"hiyoko-echo/conf"
+	"hiyoko-echo/configs"
 	"hiyoko-echo/infrastructure/database"
 	"hiyoko-echo/interactor"
 )
@@ -53,7 +53,7 @@ func init() {
 		panic("invalid server environment")
 	}
 	util.LoadEnv(serverEnv, EnvRoot)
-	databaseConf = conf.NewMySqlConf()
+	databaseConf = configs.NewMySqlConf()
 
 	// timezone
 	util.LoadTimezone()

@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"gopkg.in/natefinch/lumberjack.v2"
-	"hiyoko-echo/conf"
+	"hiyoko-echo/configs"
 	"hiyoko-echo/shared"
 	"io"
 	"strings"
@@ -29,15 +29,15 @@ func NewMiddleware(e *echo.Echo) {
 	}))
 
 	e.Use(middleware.RequestID())
-	logPath, _ := shared.GetLogFilePath(conf.LogPath)
+	logPath, _ := shared.GetLogFilePath(configs.LogPath)
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: conf.AccessLogFormat,
+		Format: configs.AccessLogFormat,
 		Output: io.MultiWriter(&lumberjack.Logger{
 			Filename:   logPath + "/access.log",
-			MaxSize:    conf.LogSize,
-			MaxBackups: conf.LogBucket,
-			MaxAge:     conf.LogAge,
-			Compress:   conf.LogCompress,
+			MaxSize:    configs.LogSize,
+			MaxBackups: configs.LogBucket,
+			MaxAge:     configs.LogAge,
+			Compress:   configs.LogCompress,
 		}),
 	}))
 

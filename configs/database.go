@@ -1,4 +1,4 @@
-package conf
+package configs
 
 import (
 	"hiyoko-echo/infrastructure/database"

@@ -12,7 +12,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"hiyoko-echo/cmd/util"
-	"hiyoko-echo/conf"
+	"hiyoko-echo/configs"
 	"hiyoko-echo/infrastructure/database"
 	logger "hiyoko-echo/infrastructure/logger/local"
 	"hiyoko-echo/interactor"
@@ -34,7 +34,7 @@ var (
 
 func init() {
 	ctx = context.Background()
-	logFilepath, err := shared.GetLogFilePath(conf.LogPath)
+	logFilepath, err := shared.GetLogFilePath(configs.LogPath)
 	if err != nil {
 		log.Fatalf("failed to get executable path; error: %v", err)
 	}
@@ -57,7 +57,7 @@ func init() {
 		loging.Fatalf(ctx, "invalid server environment")
 	}
 	util.LoadEnv(serverEnv, envRoot)
-	databaseConf = conf.NewMySqlConf()
+	databaseConf = configs.NewMySqlConf()
 
 	// timezone
 	util.LoadTimezone()
