@@ -1,12 +1,61 @@
 # go echo onion architecture
-## 前提
-Version 1.21.4
+
+```text
+root
+├── cmd: コマンドラインツール
+│   ├── cli
+│   │   ├── db
+│   │   └── task
+│   └── public
+│
+├── internal:
+│   ├── interactor: ユースケースを操作するロジック
+│   ├── presenter: presentation layer
+│   ├── infrastructure: infrastructure
+│   ├── application: application layer
+│   │   ├── dto: data transfer object - 外部アプリまたはレイヤー間でのデータ移送のため
+│   │   └── usecase: usecase
+│   │
+│   ├── domain: domain layer
+│   │   ├── entities: entity
+│   │   ├── value-objects: 値オブジェクト(不使用)
+│   │   └── services: interface
+│   │
+│   └── pkg: プロジェクトの共有コンポーネント
+│
+├── api: openapi等
+├── build: パッケージングと継続的インテグレーション(dockerfile等)
+├── configs: 設定ファイル
+├── docs: ドキュメント(api docは除く)
+└── util: 言語特有のutil
+```
+
+## 起動前提
+go version 1.21.4
 OS macOS
 shell zsh
 docker
 
 ## todo
-golangをdocker化
+- echo文言の削除
+- util envの修正
+- loggerの作成+リクエストID追跡が出来るか等
+- validate input output ユーザー入力値についてプレゼンテーション層で行う
+- エラーハンドリング
+- diについて
+- dtoのついか
+- 時間のutil
+- domain serviceにentityを追加
+- vendorについて
+- バージョンアップ（全体的に）
+- todoの消化
+- 全てのどうかく
+- golangをdocker化
+- 全てのどうかく
+- swagger(oapiのcode genに修正)
+- jwtに導入
+- メール送信(パスワード忘れた機能の作成)
+- 多言語化
 
 ## ツールのインストール
 go tools
@@ -19,7 +68,6 @@ $ make go/install/tools
 
 ## ドキュメント
 - [quick start](./docs/markdown/quick-start.md)
-- [folder struct](./docs/markdown/folder-struct.md)
 - [git rule](./docs/markdown/git/rule.md)
 
 ## 問題
