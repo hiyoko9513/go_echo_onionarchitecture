@@ -26,7 +26,7 @@ const (
 )
 
 var (
-	loging       logger.Logger
+	logging      logger.Logger
 	serverEnv    util.ServerEnv
 	databaseConf database.Conf
 	ctx          context.Context
@@ -38,12 +38,12 @@ func init() {
 	if err != nil {
 		log.Fatalf("failed to get executable path; error: %v", err)
 	}
-	loging = logger.NewLogger(logFilepath)
+	logging = logger.NewLogger(logFilepath)
 
 	// seed
 	seed, err := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
 	if err != nil {
-		loging.Fatalf(ctx, "failed to create seed; error: %v", err)
+		logging.Fatalf(ctx, "failed to create seed; error: %v", err)
 	}
 	rand.NewSource(seed.Int64())
 
@@ -54,7 +54,7 @@ func init() {
 	// load env
 	serverEnv = util.ServerEnv(*server)
 	if ok := serverEnv.Regexp(); !ok {
-		loging.Fatalf(ctx, "invalid server environment")
+		logging.Fatalf(ctx, "invalid server environment")
 	}
 	util.LoadEnv(serverEnv, envRoot)
 	databaseConf = configs.NewMySqlConf()
@@ -68,12 +68,12 @@ func main() {
 	e.HideBanner = true
 	entClient, err := database.NewMySqlConnect(serverEnv, databaseConf)
 	if err != nil {
-		loging.Fatalf(ctx, "failed to create dbclient; error: %v", err)
+		logging.Fatalf(ctx, "failed to create dbclient; error: %v", err)
 	}
 	defer func(entClient *database.EntClient) {
 		err := entClient.Close()
 		if err != nil {
-			loging.Fatalf(ctx, "failed to close dbclient; error: %v", err)
+			logging.Fatalf(ctx, "failed to close dbclient; error: %v", err)
 		}
 	}(entClient)
 
@@ -83,9 +83,9 @@ func main() {
 	router.NewRouter(e, h)
 	middleware.NewMiddleware(e)
 	if err := e.Start(fmt.Sprintf(":%d", util.Env("SERVER_PORT").GetInt(8000))); err != nil {
-		loging.Fatalf(ctx, "failed to start server; error: %v", err)
+		logging.Fatalf(ctx, "failed to start server; error: %v", err)
 	}
 
 	// todo 正常にサーバーが立ち上がったlogを作成
-	//loging.Fatalf("failed to start server; error: %v", err)
+	//logging.Fatalf("failed to start server; error: %v", err)
 }
