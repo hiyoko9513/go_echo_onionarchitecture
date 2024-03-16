@@ -1,11 +1,12 @@
 package handler
 
 import (
+	"hiyoko-echo/util"
 	"net/http"
 
 	"hiyoko-echo/internal/application/usecase"
 	"hiyoko-echo/internal/pkg/ent"
-	"hiyoko-echo/internal/pkg/ent/util"
+	eutil "hiyoko-echo/internal/pkg/ent/util"
 
 	"github.com/labstack/echo/v4"
 )
@@ -31,7 +32,7 @@ func (h *userHandler) ListUsers(c echo.Context) error {
 
 	users, err := h.UserUseCase.GetUsers(ctx)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, "")
+		return echo.NewHTTPError(http.StatusBadRequest, util.GetErrorMessage(http.StatusBadRequest))
 	}
 
 	return c.JSON(http.StatusOK, users)
@@ -41,9 +42,9 @@ func (h *userHandler) GetUser(c echo.Context) error {
 	ctx := c.Request().Context()
 	id := c.Param("id")
 
-	user, err := h.UserUseCase.GetUser(ctx, util.ID(id))
+	user, err := h.UserUseCase.GetUser(ctx, eutil.ID(id))
 	if err != nil {
-		return echo.NewHTTPError(http.StatusNotFound, "")
+		return echo.NewHTTPError(http.StatusNotFound, util.GetErrorMessage(http.StatusNotFound))
 	}
 
 	return c.JSON(http.StatusOK, user)
@@ -58,7 +59,7 @@ func (h *userHandler) CreateUser(c echo.Context) error {
 
 	user, err := h.UserUseCase.CreateUser(ctx, user)
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, "")
+		return echo.NewHTTPError(http.StatusBadRequest, util.GetErrorMessage(http.StatusBadRequest))
 	}
 
 	return c.JSON(http.StatusCreated, user)
@@ -68,9 +69,9 @@ func (h *userHandler) UpdateUser(c echo.Context) error {
 	ctx := c.Request().Context()
 	id := c.Param("id")
 
-	user, err := h.UserUseCase.UpdateUser(ctx, util.ID(id))
+	user, err := h.UserUseCase.UpdateUser(ctx, eutil.ID(id))
 	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, "")
+		return echo.NewHTTPError(http.StatusBadRequest, util.GetErrorMessage(http.StatusBadRequest))
 	}
 
 	return c.JSON(http.StatusOK, user)
@@ -80,8 +81,8 @@ func (h *userHandler) DeleteUser(c echo.Context) error {
 	ctx := c.Request().Context()
 	id := c.Param("id")
 
-	if err := h.UserUseCase.DeleteUser(ctx, util.ID(id)); err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, "")
+	if err := h.UserUseCase.DeleteUser(ctx, eutil.ID(id)); err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest, util.GetErrorMessage(http.StatusBadRequest))
 	}
 
 	return c.NoContent(http.StatusNoContent)

@@ -7,7 +7,7 @@ import (
 )
 
 func NewRouter(e *echo.Echo, h handler.AppHandler) {
-	api := e.Group("/api")
+	api := e.Group("")
 	v1 := api.Group("/v1")
 	v1.POST("/users", h.CreateUser)
 	v1.GET("/users", h.ListUsers)
