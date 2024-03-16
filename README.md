@@ -21,12 +21,13 @@ root
 │   │   ├── value-objects: 値オブジェクト(不使用)
 │   │   └── services: interface
 │   │
-│   └── pkg: プロジェクトの共有コンポーネント
+│   └── pkg: プロジェクトの共有コンポーネント(このプロジェクト固有)
 │
 ├── api: openapi等
 ├── build: パッケージングと継続的インテグレーション(dockerfile等)
 ├── configs: 設定ファイル
 ├── docs: ドキュメント(api docは除く)
+├── pkg: プロジェクトの共有コンポーネント(他のプロジェクトでも利用可)
 └── util: 言語特有のutil
 ```
 
@@ -37,7 +38,7 @@ shell zsh
 docker
 
 ## todo
-- loggerの作成(グローバルなpackageに落とし込む)
+- 全ファイルでloggerを利用するようにする
 - validate input output ユーザー入力値についてプレゼンテーション層で行う
 - エラーハンドリング
 - diについて

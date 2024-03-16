@@ -1,11 +1,9 @@
 package main
 
 import (
-	"context"
 	crand "crypto/rand"
 	"flag"
 	"fmt"
-	"log"
 	"math"
 	"math/big"
 	"math/rand"
@@ -13,9 +11,9 @@ import (
 	"hiyoko-echo/configs"
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/interactor"
-	logger "hiyoko-echo/internal/pkg/logging/local"
 	"hiyoko-echo/internal/presentation/http/middleware"
 	"hiyoko-echo/internal/presentation/http/router"
+	"hiyoko-echo/pkg/logging/file"
 	"hiyoko-echo/util"
 
 	"github.com/labstack/echo/v4"
@@ -23,26 +21,23 @@ import (
 
 const (
 	envRoot = "cmd/public"
+	logDir  = "./log/public"
 )
 
 var (
-	slog         logger.Logger
 	serverEnv    util.ServerEnv
 	databaseConf database.Conf
-	ctx          context.Context
 )
 
 func init() {
-	ctx = context.Background()
-	logFilepath, err := util.GetLogFilePath(configs.LogPath)
-	if err != nil {
-		log.Fatalf("failed to get executable path; error: %v", err)
-	}
-	slog = logger.NewLogger(logFilepath)
+
+	logger.SetLogDir(logDir)
+	logger.Initialize()
+
 	// seed
 	seed, err := crand.Int(crand.Reader, big.NewInt(math.MaxInt64))
 	if err != nil {
-		slog.Fatalf(ctx, "failed to create seed; error: %v", err)
+		logger.Fatal("failed to create seed", "error", err)
 	}
 	rand.NewSource(seed.Int64())
 
@@ -53,7 +48,7 @@ func init() {
 	// load env
 	serverEnv = util.ServerEnv(*server)
 	if ok := serverEnv.Regexp(); !ok {
-		slog.Fatalf(ctx, "invalid server environment")
+		logger.Fatal("invalid server environment")
 	}
 	util.LoadEnv(serverEnv, envRoot)
 	databaseConf = configs.NewMySqlConf()
@@ -67,12 +62,12 @@ func main() {
 	e.HideBanner = true
 	entClient, err := database.NewMySqlConnect(serverEnv, databaseConf)
 	if err != nil {
-		slog.Fatalf(ctx, "failed to create dbclient; error: %v", err)
+		logger.Fatal("failed to create dbclient", "error", err)
 	}
 	defer func(entClient *database.EntClient) {
 		err := entClient.Close()
 		if err != nil {
-			slog.Fatalf(ctx, "failed to close dbclient; error: %v", err)
+			logger.Fatal("failed to close dbclient", "error", err)
 		}
 	}(entClient)
 
@@ -82,8 +77,8 @@ func main() {
 	router.NewRouter(e, h)
 	middleware.NewMiddleware(e)
 	if err := e.Start(fmt.Sprintf(":%d", util.Env("SERVER_PORT").GetInt(8000))); err != nil {
-		slog.Error(ctx, "failed to start server; error: %v", err)
+		logger.Fatal("failed to start server; error", "error", err)
 	}
 
-	slog.Info(ctx, "Server started on port: %d", util.Env("SERVER_PORT").GetInt(8000))
+	logger.Fatal(fmt.Sprintf("Server started on port: %d", util.Env("SERVER_PORT").GetInt(8000)))
 }

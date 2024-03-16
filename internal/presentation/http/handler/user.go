@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	logger "hiyoko-echo/pkg/logging/file"
 	"net/http"
 
 	"hiyoko-echo/internal/application/usecase"
@@ -47,6 +48,7 @@ func (h *userHandler) GetUser(c echo.Context) error {
 	if ctx == nil {
 		ctx = context.Background()
 	}
+	logger.Info("get user", "id", id)
 
 	user, err := h.UserUseCase.GetUser(ctx, util.ID(id))
 	if err != nil {

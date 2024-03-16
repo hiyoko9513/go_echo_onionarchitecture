@@ -1,16 +1,14 @@
 package middleware
 
 import (
-	"io"
+	logger "hiyoko-echo/pkg/logging/file"
 	"strings"
 	"time"
 
-	"hiyoko-echo/configs"
 	"hiyoko-echo/util"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 func NewMiddleware(e *echo.Echo) {
@@ -31,23 +29,16 @@ func NewMiddleware(e *echo.Echo) {
 	}))
 
 	e.Use(middleware.RequestID())
-
-	logPath, _ := util.GetLogFilePath(configs.LogPath)
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: configs.AccessLogFormat,
-		Output: io.MultiWriter(&lumberjack.Logger{
-			Filename:   logPath + "/access.log",
-			MaxSize:    configs.LogSize,
-			MaxBackups: configs.LogBucket,
-			MaxAge:     configs.LogAge,
-			Compress:   configs.LogCompress,
-		}),
+		Format: logger.AccessLogFormat,
+		Output: logger.NewAccessLogger(),
 	}))
 
 	e.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			reqID := c.Response().Header().Get(echo.HeaderXRequestID)
 			c.Set("RequestID", reqID)
+			logger.With("request_id", reqID)
 			return next(c)
 		}
 	})
