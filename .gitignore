@@ -8,6 +8,12 @@
 # production file
 *.production
 
+# ent
+pkg/mypubliclib/ent/*
+!pkg/mypubliclib/ent/schema/*
+!pkg/mypubliclib/ent/template/*
+!pkg/mypubliclib/ent/util/*
+
 
 #####################################
 ### ↓ templates

@@ -1,6 +1,6 @@
 module hiyoko-echo
 
-go 1.19
+go 1.21
 
 require (
 	entgo.io/ent v0.11.9

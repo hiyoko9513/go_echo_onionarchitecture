@@ -1,13 +1,12 @@
 # SERVER option (local|develop|staging|production)
 SERVER=local
 
-# tools version
 GO_AIR_VERSION=latest
 GO_STATICCHECK_VERSION=latest
 
 # init
 git/init: git/commit-template
-docker/db/init: docker/up sleep db/migrate
+docker/db/init:
 
 # go
 go/install/tools:
@@ -19,7 +18,7 @@ go/lint:
 
 # db
 ent/gen:
-	go run -mod=mod entgo.io/ent/cmd/ent generate --template ./ent/template --template glob="./ent/template/*.tmpl" ./ent/schema
+	go run -mod=mod entgo.io/ent/cmd/ent generate --template glob="./pkg/mypubliclib/ent/template/*.tmpl" ./pkg/mypubliclib/ent/schema
 
 db/migrate:
 	go run ./cmd/cli/db/main.go -server $(SERVER) -query migrate
@@ -29,12 +28,13 @@ db/seed:
 
 # server
 server/run:
-	go run ./cmd/public/migration.go -server $(SERVER)
-
-server/run-air:
+	go run ./cmd/public/main.go -server $(SERVER)
+server/run-air: # local only
 	air -c ./cmd/public/air.toml
 
 # docker
+docker/build:
+	docker-compose --env-file ./cmd/public/.env.$(SERVER) build
 docker/up:
 	docker-compose --env-file ./cmd/public/.env.$(SERVER) up -d
 
@@ -49,6 +49,9 @@ quick-start:
 	go mod tidy &&\
 	make go/install/tools &&\
 	source ~/.zshrc &&\
+	make docker/up &&\
+	make sleep &&\
+	make db/migrate &&\
 	make docker/db/init &&\
 	make db/seed &&\
 	make server/run-air

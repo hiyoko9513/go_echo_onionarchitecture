@@ -3,7 +3,7 @@ package schema
 import (
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
-	"hiyoko-echo/ent/util"
+	"hiyoko-echo/pkg/mypubliclib/ent/util"
 	"time"
 )
 

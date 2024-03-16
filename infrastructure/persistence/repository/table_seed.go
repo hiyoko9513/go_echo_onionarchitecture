@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"hiyoko-echo/ent"
+	"hiyoko-echo/pkg/mypubliclib/ent"
 )
 
 func (r *tableRepository) Seed(ctx context.Context) error {

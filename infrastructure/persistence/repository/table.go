@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"hiyoko-echo/domain/repository"
-	"hiyoko-echo/ent/migrate"
 	"hiyoko-echo/infrastructure/database"
+	"hiyoko-echo/pkg/mypubliclib/ent/migrate"
 )
 
 type tableRepository struct {

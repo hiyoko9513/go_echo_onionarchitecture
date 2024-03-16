@@ -5,6 +5,9 @@ OS macOS
 shell zsh
 docker
 
+## todo
+golangをdocker化
+
 ## ツールのインストール
 go tools
 ```shell
