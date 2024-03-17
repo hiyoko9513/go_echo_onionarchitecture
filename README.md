@@ -40,7 +40,8 @@ docker
 ## todo
 - jwtに導入→dtoが必要そうなら導入
 - oapiのvalidate makefileを追加
-- entityの作成
+- entityの作成+dto作成
+- トランザクションの考慮
 - postmanのドキュメント化について
 - vendorについて
 - メール送信(パスワード忘れた機能の作成)
@@ -62,14 +63,9 @@ $ make go/install/tools
 - [quick start](./docs/markdown/quick-start.md)
 - [git rule](./docs/markdown/git/rule.md)
 
-## 問題
-- sqlのdebug modeが利用できない（https://github.com/ent/ent/issues/85）
-- entの外部テンプレートについて、client.goに組み込みたい
-
 ## depend on(go)
 - ent
 - echo
 - staticcheck
 - godotenv
 - air
-- oapi-codegen

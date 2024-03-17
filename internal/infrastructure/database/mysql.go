@@ -43,11 +43,9 @@ func NewMySqlConnect(env util.ServerEnv, conf Conf) (*EntClient, error) {
 
 	client := ent.NewClient(ent.Driver(drv))
 
-	// fixme: debug mode not available
-	// debug mode
-	//if env != "staging" && env != "production" {
-	//	client = client.Debug()
-	//}
+	if env != "staging" && env != "production" {
+		client = client.Debug()
+	}
 
 	return &EntClient{client}, nil
 }

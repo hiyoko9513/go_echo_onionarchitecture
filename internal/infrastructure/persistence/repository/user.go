@@ -17,9 +17,6 @@ func NewUserRepository(conn *database.EntClient) services.UserRepository {
 	return &userRepository{conn}
 }
 
-// todo curdをentの共通関数とするような作りにする
-// todo txの導入
-
 func (r *userRepository) List(ctx context.Context) ([]*ent.User, error) {
 	u, err := r.conn.User.Query().Limit(10).Offset(0).All(ctx)
 	return u, err
