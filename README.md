@@ -31,11 +31,11 @@ root
 └── util: 言語特有のutil
 ```
 
-## 起動前提
-go version 1.21.4
-OS macOS
-shell zsh
-docker
+## 前提
+go version 1.22.1  
+OS macOS  
+shell zsh  
+docker  
 
 ## todo
 - jwtに導入→dtoが必要そうなら導入
@@ -56,9 +56,6 @@ go tools
 $ make go/install/tools
 ```
 
-## ブランチについて
-- main=local完結 hiyokoのメイン
-
 ## ドキュメント
 - [quick start](./docs/markdown/quick-start.md)
 - [git rule](./docs/markdown/git/rule.md)
@@ -69,3 +66,9 @@ $ make go/install/tools
 - staticcheck
 - godotenv
 - air
+
+## ポートが起動したままになってしまった場合
+8000 port kill
+```shell
+$ lsof -i :8000  | tail -n 1 | awk '{print $2}' | xargs kill -9
+```
