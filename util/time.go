@@ -15,6 +15,11 @@ func JstNow() time.Time {
 	return time.Now().In(jst)
 }
 
+// ToRFC3339 SO 8601形式の文字列に変換
+func ToRFC3339(t time.Time) string {
+	return t.Format(time.RFC3339)
+}
+
 func LoadTimezone() {
 	time.Local = Timezone()
 }
