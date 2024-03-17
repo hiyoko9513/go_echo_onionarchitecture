@@ -1,0 +1,11 @@
+type: object
+properties:
+  id:
+    type: string
+    example: 'hiyoko_id'
+  name:
+    type: string
+    example: '山田悠介'
+required:
+  - id
+  - name

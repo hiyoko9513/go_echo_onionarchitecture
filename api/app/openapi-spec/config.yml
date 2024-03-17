@@ -1,0 +1,5 @@
+package: oapi
+generate:
+  echo-server: true
+  models: true
+output: internal/presentation/http/app/oapi/code.gen.go

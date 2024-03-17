@@ -1,0 +1,22 @@
+get:
+  operationId: getUser
+  summary: get user info by id
+  description: Return user info by id
+  tags:
+    - users
+  parameters:
+    - name: id
+      in: path
+      required: true
+      description: The id of the user to retrieve
+      schema:
+        type: string
+  responses:
+    '200':
+      description: user info
+      content:
+        application/json:
+          schema:
+            $ref: '../../schema/user.yml'
+    '400':
+      $ref: '../../responses/errors/BadRequest.yml'
