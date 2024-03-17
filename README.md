@@ -38,9 +38,10 @@ shell zsh
 docker
 
 ## todo
-- entityの作成
-- バージョンアップ（全体的に）
 - jwtに導入→dtoが必要そうなら導入
+- oapiのvalidate makefileを追加
+- entityの作成
+- postmanのドキュメント化について
 - vendorについて
 - メール送信(パスワード忘れた機能の作成)
 - 多言語化
