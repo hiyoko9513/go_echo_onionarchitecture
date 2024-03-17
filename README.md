@@ -38,23 +38,17 @@ shell zsh
 docker
 
 ## todo
+- responseのファイル名の修正（modelつかわないから修正いらないかも）とentityの作成
 - diについて
-- dtoのついか
-- 時間のutil
-- ctxにリクエストIDを導入
-- domain serviceにentityを追加
+- entityを追加
 - vendorについて
 - バージョンアップ（全体的に）
-- todoの消化
-- 全てのどうかく
-- golangをdocker化
-- 全てのどうかく
-- linter、format確認、ent実行のgitactionの追加 
-- swagger(oapiのcode genに修正)
-- jwtに導入
+- testコード
+- jwtに導入→dtoが必要そうなら導入
 - メール送信(パスワード忘れた機能の作成)
 - 多言語化
-- loggerにおいて、request idの紐づけについて、request idが存在しない場合はreqIDのコメントを排除
+- linter、format確認、ent実行、testのgitactionの追加
+- golangをdocker化
 
 ## ツールのインストール
 go tools

@@ -2,6 +2,8 @@ package shared
 
 import "net/http"
 
+const NoneCode = "000"
+
 func GetErrorMessage(statusCode int) string {
 	switch statusCode {
 	case http.StatusBadRequest:
@@ -17,4 +19,15 @@ func GetErrorMessage(statusCode int) string {
 	default:
 		return "Error"
 	}
+}
+
+type ErrorResponse struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+type ValidateErrorResponse struct {
+	Code    string   `json:"code"`
+	Message string   `json:"message"`
+	Errors  []string `json:"errors"`
 }

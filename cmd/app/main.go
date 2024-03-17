@@ -12,7 +12,7 @@ import (
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/interactor"
 	"hiyoko-echo/internal/presentation/http/app/middleware"
-	"hiyoko-echo/internal/presentation/http/app/oapi"
+	"hiyoko-echo/internal/presentation/http/app/router"
 	"hiyoko-echo/pkg/logging/file"
 	"hiyoko-echo/util"
 
@@ -59,8 +59,6 @@ func init() {
 func main() {
 	e := echo.New()
 	e.HideBanner = true
-	e.HidePort = true
-
 	entClient, err := database.NewMySqlConnect(serverEnv, databaseConf)
 	if err != nil {
 		logger.Fatal("failed to create dbclient", "error", err)
@@ -75,7 +73,7 @@ func main() {
 	i := interactor.NewInteractor(entClient)
 	h := i.NewAppHandler()
 
-	oapi.RegisterHandlers(e, h)
+	router.NewRouter(e, h)
 	middleware.NewMiddleware(e)
 	if err := e.Start(fmt.Sprintf(":%d", util.Env("SERVER_PORT").GetInt(8000))); err != nil {
 		logger.Fatal("failed to start server; error", "error", err)

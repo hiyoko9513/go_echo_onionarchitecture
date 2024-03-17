@@ -6,7 +6,6 @@ import (
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/infrastructure/persistence/repository"
 	"hiyoko-echo/internal/presentation/http/app/handler"
-	"hiyoko-echo/internal/presentation/http/app/oapi"
 )
 
 type Interactor interface {
@@ -14,7 +13,7 @@ type Interactor interface {
 	NewUserRepository() services.UserRepository
 	NewUserUseCase() usecase.UserUseCase
 	NewUserHandler() handler.UserHandler
-	NewAppHandler() oapi.ServerInterface
+	NewAppHandler() handler.AppHandler
 }
 
 type interactor struct {
@@ -29,7 +28,7 @@ type appHandler struct {
 	handler.UserHandler
 }
 
-func (i *interactor) NewAppHandler() oapi.ServerInterface {
+func (i *interactor) NewAppHandler() handler.AppHandler {
 	appHandler := &appHandler{}
 	appHandler.UserHandler = i.NewUserHandler()
 	return appHandler
