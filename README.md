@@ -38,15 +38,13 @@ shell zsh
 docker
 
 ## todo
-- responseのファイル名の修正（modelつかわないから修正いらないかも）とentityの作成
-- diについて
-- entityを追加
-- vendorについて
+- entityの作成
 - バージョンアップ（全体的に）
-- testコード
 - jwtに導入→dtoが必要そうなら導入
+- vendorについて
 - メール送信(パスワード忘れた機能の作成)
 - 多言語化
+- testコード
 - linter、format確認、ent実行、testのgitactionの追加
 - golangをdocker化
 
