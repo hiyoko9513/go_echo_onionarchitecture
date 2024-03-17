@@ -2,10 +2,10 @@ package usecase
 
 import (
 	"context"
-	"hiyoko-echo/internal/presentation/http/app/oapi"
 
 	"hiyoko-echo/internal/domain/services"
 	"hiyoko-echo/internal/pkg/ent/util"
+	"hiyoko-echo/internal/presentation/http/app/oapi"
 )
 
 type UserUseCase interface {

@@ -38,7 +38,6 @@ shell zsh
 docker
 
 ## todo
-- validate input output ユーザー入力値についてプレゼンテーション層で行う
 - diについて
 - dtoのついか
 - 時間のutil

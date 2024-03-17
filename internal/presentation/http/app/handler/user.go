@@ -1,12 +1,12 @@
 package handler
 
 import (
-	"hiyoko-echo/internal/presentation/http/app/oapi"
-	"hiyoko-echo/internal/shared"
 	"net/http"
 
 	"hiyoko-echo/internal/application/usecase"
-	eutil "hiyoko-echo/internal/pkg/ent/util"
+	"hiyoko-echo/internal/pkg/ent/util"
+	"hiyoko-echo/internal/presentation/http/app/oapi"
+	"hiyoko-echo/internal/shared"
 
 	"github.com/labstack/echo/v4"
 )
@@ -26,7 +26,7 @@ func NewUserHandler(u usecase.UserUseCase) UserHandler {
 func (h *userHandler) GetUser(c echo.Context, id string) error {
 	ctx := c.Request().Context()
 
-	user, err := h.UserUseCase.GetUser(ctx, eutil.ID(id))
+	user, err := h.UserUseCase.GetUser(ctx, util.ID(id))
 	if err != nil {
 		return c.JSON(http.StatusNotFound, oapi.DefaultErrorSchema{
 			Code:     shared.NoneCode,

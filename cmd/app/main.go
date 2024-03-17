@@ -4,7 +4,6 @@ import (
 	crand "crypto/rand"
 	"flag"
 	"fmt"
-	"hiyoko-echo/internal/presentation/http/app/oapi"
 	"math"
 	"math/big"
 	"math/rand"
@@ -13,6 +12,7 @@ import (
 	"hiyoko-echo/internal/infrastructure/database"
 	"hiyoko-echo/internal/interactor"
 	"hiyoko-echo/internal/presentation/http/app/middleware"
+	"hiyoko-echo/internal/presentation/http/app/oapi"
 	"hiyoko-echo/pkg/logging/file"
 	"hiyoko-echo/util"
 
