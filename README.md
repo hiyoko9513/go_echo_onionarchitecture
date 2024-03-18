@@ -31,24 +31,14 @@ root
 └── util: 言語特有のutil
 ```
 
+## todo
+- entityの作成+dto作成
+
 ## 前提
 go version 1.22.1  
 OS macOS  
 shell zsh  
-docker  
-
-## todo
-- jwtに導入→dtoが必要そうなら導入
-- oapiのvalidate makefileを追加
-- entityの作成+dto作成
-- トランザクションの考慮
-- postmanのドキュメント化について
-- vendorについて
-- メール送信(パスワード忘れた機能の作成)
-- 多言語化
-- testコード
-- linter、format確認、ent実行、testのgitactionの追加
-- golangをdocker化
+docker
 
 ## ツールのインストール
 go tools

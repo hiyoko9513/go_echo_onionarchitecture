@@ -1,10 +1,12 @@
 package schema
 
 import (
+	"time"
+
+	"hiyoko-echo/internal/pkg/ent/util"
+
 	"entgo.io/ent"
 	"entgo.io/ent/schema/field"
-	"hiyoko-echo/internal/pkg/ent/util"
-	"time"
 )
 
 // User holds the schema definition for the User entity.

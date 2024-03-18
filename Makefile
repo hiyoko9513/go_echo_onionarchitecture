@@ -42,6 +42,8 @@ docker/up:
 # oapi
 oapi/gen/app:
 	docker run --rm -v $(PWD):/spec redocly/cli:latest bundle api/app/openapi-spec/root.yml -o api/app/openapi-spec/root.gen.yml
+oapi/validate/app:
+	docker run --rm -v $(PWD)/api/app/openapi-spec:/spec openapitools/openapi-generator-cli validate -i /spec/root.gen.yml
 oapi/run/app: oapi/gen/app
 	docker run -p 8081:8080 -v $(PWD)/api/app/openapi-spec:/usr/share/nginx/html/api -e API_URL=api/root.gen.yml swaggerapi/swagger-ui
 
