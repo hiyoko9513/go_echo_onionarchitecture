@@ -34,6 +34,7 @@ root
 ## todo
 - entityの作成+dto作成
 - git actionに自動生成系を対応
+- requestバリデーション
 
 ## 前提
 go version 1.22.1  
